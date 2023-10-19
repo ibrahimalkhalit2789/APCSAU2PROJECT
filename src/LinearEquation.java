@@ -50,7 +50,7 @@ public class LinearEquation {
         return points + "\n" + slope + "\n" + yint + "\n" + equation + "\n" + distance + "\n";
     }
 /*
-    public string xToCoord() {
+  //  public string xToCoord() {
 
     }
     */

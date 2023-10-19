@@ -5,6 +5,6 @@ public class LinearEquationRunner {
         System.out.printf("%.2f %n", po.slope());
         System.out.printf("%.2f %n", po.yint());
         System.out.println(po.equationToString()); */
-        System.out.println(LinearEquation.equationInfo());
+   //     System.out.println(LinearEquation.equationInfo());
     }
 }
