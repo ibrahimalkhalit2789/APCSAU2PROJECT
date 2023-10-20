@@ -16,26 +16,40 @@ public class LinearEquation {
     //METHODS
     public double distance() {
         double distance = Math.sqrt((Math.pow((x2 - x1), 2)) + (Math.pow((y2 - y1), 2)));
-        return distance;
+        return Math.round(distance * 1000.00) / 1000.00;
     }
 
     public double slope() {
-        double slope = ((y2 - y1) / (x2 - x1));
-        return slope;
+        double slope = ((double) (y2 - y1) / (x2 - x1));
+        return Math.round(slope * 1000.0) / 1000.0;
     }
 
     public double yint() {
-        double yint = y1 - slope()*x1;
-        return yint;
+        double yint = ((double) y1 - slope()*x1);
+        return Math.round(yint * 1000.0) / 1000.0;
     }
 
     public String equationToString() {
         // y = mx+b
-        String equation;
+        String equation = "n/a";
         if ((y2 - y1) % (x2 - x1) == 0) {
             equation = "y = " + ((y2 - y1) / (x2 - x1)) + "x + " + yint();
         } else {
-            equation = "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yint();
+            if (y2 - y1 < 0 && x2 - x1 < 0) {
+                equation = "y = -" + ((y2 - y1) * -1) + "/" + ((x2 - x1) * -1) + "x + " + yint();
+            } else if (y2 - y1 > 0 && x2 - x1 < 0) {
+                equation = "y =" + (y2 - y1) + "/" + ((x2 - x1) * -1) + "x + " + yint();
+            } else if (y2 - y1 < 0 && x2 - x1 > 0) {
+                equation = "y = -" + ((y2 - y1) * -1) + "/" + (x2 - x1) + "x + " + yint();
+            } else {
+                equation = "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yint();
+            }
+        }
+        if(yint() == 0) {
+            equation = equation.substring(0, equation.indexOf("+"));
+        }
+        if(slope() == 0) {
+            equation = equation.substring(0, equation.indexOf("0")) + equation.substring(equation.indexOf("x") + 3);
         }
         return equation;
     }
@@ -49,9 +63,8 @@ public class LinearEquation {
         String distance = ("DISTANCE BETWEEN POINTS: " + distance());
         return points + "\n" + slope + "\n" + yint + "\n" + equation + "\n" + distance + "\n";
     }
-/*
-  //  public string xToCoord() {
-
+    public String xToCoord(double xValue) {
+        double yValue = (slope() * xValue) + yint();
+        return "(" + xValue + ", " + Math.round(yValue * 1000.0) / 1000.0 + ")";
     }
-    */
 }
