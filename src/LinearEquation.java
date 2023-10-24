@@ -16,33 +16,49 @@ public class LinearEquation {
     //METHODS
     public double distance() {
         double distance = Math.sqrt((Math.pow((x2 - x1), 2)) + (Math.pow((y2 - y1), 2)));
-        return Math.round(distance * 1000.00) / 1000.00;
+        return Math.round(distance * 100.00) / 100.00;
     }
 
     public double slope() {
         double slope = ((double) (y2 - y1) / (x2 - x1));
-        return Math.round(slope * 1000.0) / 1000.0;
+        return Math.round(slope * 100.0) / 100.0;
     }
 
     public double yint() {
         double yint = ((double) y1 - slope()*x1);
-        return Math.round(yint * 1000.0) / 1000.0;
+        return Math.round(yint * 100.0) / 100.0;
     }
 
     public String equationToString() {
         // y = mx+b
         String equation = "n/a";
-        if ((y2 - y1) % (x2 - x1) == 0) {
-            equation = "y = " + ((y2 - y1) / (x2 - x1)) + "x + " + yint();
-        } else {
-            if (y2 - y1 < 0 && x2 - x1 < 0) {
-                equation = "y = -" + ((y2 - y1) * -1) + "/" + ((x2 - x1) * -1) + "x + " + yint();
-            } else if (y2 - y1 > 0 && x2 - x1 < 0) {
-                equation = "y =" + (y2 - y1) + "/" + ((x2 - x1) * -1) + "x + " + yint();
-            } else if (y2 - y1 < 0 && x2 - x1 > 0) {
-                equation = "y = -" + ((y2 - y1) * -1) + "/" + (x2 - x1) + "x + " + yint();
+        if (yint() > 0) {
+            if ((y2 - y1) % (x2 - x1) == 0) {
+                equation = "y = " + ((y2 - y1) / (x2 - x1)) + "x + " + yint();
             } else {
-                equation = "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yint();
+                if (y2 - y1 < 0 && x2 - x1 < 0) {
+                    equation = "y = -" + ((y2 - y1) * -1) + "/" + ((x2 - x1) * -1) + "x + " + yint();
+                } else if (y2 - y1 > 0 && x2 - x1 < 0) {
+                    equation = "y =" + (y2 - y1) + "/" + ((x2 - x1) * -1) + "x + " + yint();
+                } else if (y2 - y1 < 0 && x2 - x1 > 0) {
+                    equation = "y = -" + ((y2 - y1) * -1) + "/" + (x2 - x1) + "x + " + yint();
+                } else {
+                    equation = "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yint();
+                }
+            }
+        } else {
+            if ((y2 - y1) % (x2 - x1) == 0) {
+                equation = "y = " + ((y2 - y1) / (x2 - x1)) + "x " + yint();
+            } else {
+                if (y2 - y1 < 0 && x2 - x1 < 0) {
+                    equation = "y = -" + ((y2 - y1) * -1) + "/" + ((x2 - x1) * -1) + "x " + yint();
+                } else if (y2 - y1 > 0 && x2 - x1 < 0) {
+                    equation = "y =" + (y2 - y1) + "/" + ((x2 - x1) * -1) + "x " + yint();
+                } else if (y2 - y1 < 0 && x2 - x1 > 0) {
+                    equation = "y = -" + ((y2 - y1) * -1) + "/" + (x2 - x1) + "x " + yint();
+                } else {
+                    equation = "y = " + (y2 - y1) + "/" + (x2 - x1) + "x " + yint();
+                }
             }
         }
         if(yint() == 0) {
@@ -65,6 +81,6 @@ public class LinearEquation {
     }
     public String xToCoord(double xValue) {
         double yValue = (slope() * xValue) + yint();
-        return "(" + xValue + ", " + Math.round(yValue * 1000.0) / 1000.0 + ")";
+        return "(" + xValue + ", " + Math.round(yValue * 100.0) / 100.0 + ")";
     }
 }
